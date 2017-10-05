@@ -1,61 +1,66 @@
 EE 450 Socket Programming Project README
 
 Name: Bryan Yaggi
-USC ID: 1422061926
 
-Project Summary:
-	I created software programs with socket interfaces that communicate with
-	eachother to perform a series of bitwise AND and bitwise OR operations.
-	These programs represent a client comminucating with servers using
-	computational offloading. The client reads an input file containing bitwise
-	operation jobs and sends these jobs to an edge server via a stream socket.
-	The edge server receives the jobs and distributes them to backend servers
-	via a datagram socket. There is a backend server for bitwise AND jobs and
-	one for bitwise OR jobs. The backend servers receive their jobs, perform the
-	calculations, and send the results back to the edge server via a datagram
-	socket. Once the edge server receives all the results, the results are
-	forwarded back to the client.
+Project Summary
+---------------
+I created software programs with socket interfaces that communicate with
+eachother to perform a series of bitwise AND and bitwise OR operations.
+These programs represent a client comminucating with servers using
+computational offloading. The client reads an input file containing bitwise
+operation jobs and sends these jobs to an edge server via a stream socket.
+The edge server receives the jobs and distributes them to backend servers
+via a datagram socket. There is a backend server for bitwise AND jobs and
+one for bitwise OR jobs. The backend servers receive their jobs, perform the
+calculations, and send the results back to the edge server via a datagram
+socket. Once the edge server receives all the results, the results are
+forwarded back to the client.
 
-Project Files:
-	client.c: Reads an input file, sends jobs to edge server, receives results
-		from edge server, and displays them.
+Project Files
+-------------
+client.c: Reads an input file, sends jobs to edge server, receives results
+    from edge server, and displays them.
 
-	edge.c: Receives jobs from clients, distributes jobs to backend servers,
-		collects results from the backend servers, and fowards the results back
-		to the client.
+edge.c: Receives jobs from clients, distributes jobs to backend servers,
+    collects results from the backend servers, and fowards the results back
+	to the client.
 
-	server_and.c: Receives jobs from the edge server, performs bitwise AND
-		operations, and sends the results back to the edge server.
+server_and.c: Receives jobs from the edge server, performs bitwise AND
+	operations, and sends the results back to the edge server.
 
-	server_or.c: Receives jobs from the edge server, performs bitwise OR
-		operations, and sends the results back to the edge server.
+server_or.c: Receives jobs from the edge server, performs bitwise OR
+	operations, and sends the results back to the edge server.
 
-TA Instructions:
-	The programs should be run as described in the project assignment.
+TA Instructions
+---------------
+The programs should be run as described in the project assignment.
 
-Format of Messages:
-	Client to Edge Server:
-		29 bytes (chars) total:
-		"<operator (3 chars)> <operand 1 (10 chars)> <operand 2 (10 chars)> <number of jobs (3 chars)>"
+Format of Messages
+------------------
+Client to Edge Server:
+	29 bytes (chars) total:
+	"<operator (3 chars)> <operand 1 (10 chars)> <operand 2 (10 chars)> <number of jobs (3 chars)>"
 
-	Edge Server to Backend Servers:
-		29 bytes (chars) total:
-		"<operand 1 (10 chars)> <operand 2 (10 chars)> <job number (3 chars)> <number of backend jobs (3 chars)>"
+Edge Server to Backend Servers:
+	29 bytes (chars) total:
+	"<operand 1 (10 chars)> <operand 2 (10 chars)> <job number (3 chars)> <number of backend jobs (3 chars)>"
 
-	Backend Servers to Edge Server:
-		14 bytes (chars) total:
-		"<job number (3 chars)> <result (10 chars)>"
+Backend Servers to Edge Server:
+	14 bytes (chars) total:
+	"<job number (3 chars)> <result (10 chars)>"
 
-	Edge Server to Client:
-		10 bytes (chars) total:
-		"<result (10 chars)>"
+Edge Server to Client:
+	10 bytes (chars) total:
+	"<result (10 chars)>"
 
-Idiosyncrasies:
-	The servers run indefinitely until killed.
+Idiosyncrasies
+--------------
+The servers run indefinitely until killed.
 
-Reused Code:
-	I used Beej's Guide to Network Programming and other various online
-	resources for learning about socket programming in order to complete the
-	project. I wrote all my code from scratch, but implemented ideas presented
-	in these instructionals.
+Reused Code
+-----------
+I used Beej's Guide to Network Programming and other various online
+resources for learning about socket programming in order to complete the
+project. I wrote all my code from scratch, but implemented ideas presented
+in these instructionals.
 
